@@ -13,7 +13,7 @@ Keyboard-driven window tiling for the Cinnamon desktop environment. A port of [T
 
 ```bash
 # Clone
-git clone <your-repo-url> ~/Projects/CinTile
+git clone d-harbinger ~/Projects/CinTile
 cd ~/Projects/CinTile
 
 # Deploy to Cinnamon
@@ -34,17 +34,6 @@ make deploy
 
 Press the same key twice (e.g. `Q Q`) to tile to a single cell.
 
-## Development
-
-```bash
-make deploy          # Copy files to extension directory
-make restart         # Restart Cinnamon (X11)
-make deploy-restart  # Both
-make logs            # Tail Cinnamon logs filtered for CinTile
-make clean           # Remove from extension directory
-```
-
-Debug via Looking Glass: `Alt+F2` → `lg`
 
 ## File Structure
 
