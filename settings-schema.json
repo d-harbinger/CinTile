@@ -1,0 +1,148 @@
+{
+    "keybinding": {
+        "type": "keybinding",
+        "default": "<Super>t",
+        "description": "Show tile grid"
+    },
+    "grid-rows": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "units": "rows",
+        "description": "Number of grid rows"
+    },
+    "grid-cols": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 2,
+        "max": 7,
+        "step": 1,
+        "units": "columns",
+        "description": "Number of grid columns"
+    },
+    "col-0-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 0 weight (0=hidden)"
+    },
+    "col-1-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 1 weight"
+    },
+    "col-2-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 2 weight"
+    },
+    "col-3-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 3 weight"
+    },
+    "col-4-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 4 weight"
+    },
+    "col-5-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 5 weight"
+    },
+    "col-6-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 6 weight"
+    },
+    "row-0-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 0 weight (0=hidden)"
+    },
+    "row-1-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 1 weight"
+    },
+    "row-2-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 2 weight"
+    },
+    "row-3-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 3 weight"
+    },
+    "row-4-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 4 weight"
+    },
+    "window-gap": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "units": "pixels",
+        "description": "Gap between windows"
+    },
+    "grid-opacity": {
+        "type": "scale",
+        "default": 80,
+        "min": 20,
+        "max": 100,
+        "step": 5,
+        "description": "Grid overlay opacity (%)"
+    },
+    "grid-color": {
+        "type": "colorchooser",
+        "default": "rgba(74, 144, 217, 0.3)",
+        "description": "Grid cell color"
+    },
+    "highlight-color": {
+        "type": "colorchooser",
+        "default": "rgba(255, 200, 0, 0.6)",
+        "description": "Selected cell highlight color"
+    }
+}
