@@ -64,3 +64,4 @@ Debug via Looking Glass: `Alt+F2` → `lg`
 ## License
 
 GPL-3.0 — same as Cinnamon and Tactile.
+# CinTile
