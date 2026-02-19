@@ -7,7 +7,7 @@
 import json
 import os
 
-from gi.repository import Gtk, Gdk, GLib, Gio, Pango, PangoCairo
+from gi.repository import Gtk, Gdk, GLib, Pango, PangoCairo
 from JsonSettingsWidgets import SettingsWidget
 
 UUID = "cintile@forgetting.me"
@@ -255,6 +255,14 @@ class GridWidget(SettingsWidget):
     # Cairo drawing — proportional grid preview
     # =========================================================================
 
+    @staticmethod
+    def _parse_rgba(color_str, fallback=(0.29, 0.56, 0.85, 0.3)):
+        """Parse 'rgba(r, g, b, a)' string into (r, g, b, a) floats 0–1."""
+        rgba = Gdk.RGBA()
+        if rgba.parse(str(color_str)):
+            return (rgba.red, rgba.green, rgba.blue, rgba.alpha)
+        return fallback
+
     def _on_draw(self, widget, cr):
         alloc = widget.get_allocation()
         w, h = alloc.width, alloc.height
@@ -265,6 +273,15 @@ class GridWidget(SettingsWidget):
         rws = [self._rw(i) for i in range(rows)]
         total_cw = sum(cws) or 1
         total_rw = sum(rws) or 1
+
+        # Read colors from settings (matches the live overlay)
+        fill_c = self._parse_rgba(
+            self._get("grid-color", "rgba(74, 144, 217, 0.3)"))
+        border_c = self._parse_rgba(
+            self._get("border-color", "rgba(74, 144, 217, 0.8)"))
+        text_c = self._parse_rgba(
+            self._get("text-color", "rgba(255, 255, 255, 0.9)"))
+        border_size = max(1, self._get("border-size", 2))
 
         gap = 3
 
@@ -290,13 +307,13 @@ class GridWidget(SettingsWidget):
                     continue
 
                 # Cell fill
-                cr.set_source_rgba(0.29, 0.56, 0.85, 0.3)
+                cr.set_source_rgba(*fill_c)
                 self._rounded_rect(cr, cx, cy, cw, ch, 4)
                 cr.fill()
 
                 # Cell border
-                cr.set_source_rgba(0.29, 0.56, 0.85, 0.8)
-                cr.set_line_width(2)
+                cr.set_source_rgba(*border_c)
+                cr.set_line_width(border_size)
                 self._rounded_rect(cr, cx, cy, cw, ch, 4)
                 cr.stroke()
 
@@ -304,7 +321,7 @@ class GridWidget(SettingsWidget):
                 if row < len(KEY_LABELS) and col < len(KEY_LABELS[row]):
                     label = KEY_LABELS[row][col]
                     if label:
-                        cr.set_source_rgba(1.0, 1.0, 1.0, 0.9)
+                        cr.set_source_rgba(*text_c)
                         layout = PangoCairo.create_layout(cr)
                         font = Pango.FontDescription("Sans Bold 18")
                         layout.set_font_description(font)

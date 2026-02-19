@@ -134,5 +134,9 @@
     "theme-color": {
         "type": "generic",
         "default": "rgba(74, 144, 217, 1.0)"
+    },
+    "show-highlight": {
+        "type": "generic",
+        "default": true
     }
 }

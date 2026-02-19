@@ -107,6 +107,7 @@ function init(metadata) {
     settings.bindProperty(Settings.BindingDirection.IN, "text-size", "textSize", onSettingsChanged, null);
     settings.bindProperty(Settings.BindingDirection.IN, "border-color", "borderColor", onSettingsChanged, null);
     settings.bindProperty(Settings.BindingDirection.IN, "border-size", "borderSize", onSettingsChanged, null);
+    settings.bindProperty(Settings.BindingDirection.IN, "show-highlight", "showHighlight", onSettingsChanged, null);
 
     buildKeyMap();
 }
@@ -311,7 +312,9 @@ function onKeyPress(actor, event) {
 
     if (!firstTile) {
         firstTile = tile;
-        highlightCell(tile.row, tile.col, true);
+        if (config.showHighlight) {
+            highlightCell(tile.row, tile.col, true);
+        }
         return true;
     } else {
         tileWindow(firstTile, tile);

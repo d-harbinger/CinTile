@@ -62,6 +62,18 @@ class AppearanceWidget(SettingsWidget):
         link_label = Gtk.Label(label="Link colors")
         link_row.pack_start(link_label, False, False, 0)
         link_row.pack_start(self.link_switch, False, False, 0)
+
+        hl_sep = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        link_row.pack_start(hl_sep, False, False, 12)
+
+        self.hl_switch = Gtk.Switch()
+        self.hl_switch.set_active(self._get("show-highlight", True))
+        self.hl_switch.connect("notify::active", self._on_highlight_toggled)
+
+        hl_label = Gtk.Label(label="Show selection highlight")
+        link_row.pack_start(hl_label, False, False, 0)
+        link_row.pack_start(self.hl_switch, False, False, 0)
+
         root.pack_start(link_row, False, False, 0)
 
         # --- Linked mode: theme color + highlight ---
@@ -210,6 +222,9 @@ class AppearanceWidget(SettingsWidget):
             self._apply_theme_color()
 
         self._update_mode_visibility()
+
+    def _on_highlight_toggled(self, switch, _pspec):
+        self._put("show-highlight", switch.get_active())
 
     def _update_mode_visibility(self):
         linked = self._get("link-colors", True)
