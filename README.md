@@ -11,16 +11,41 @@ Keyboard-driven window tiling for the Cinnamon desktop environment. A port of [T
 
 ## Install
 
+### Using Make (recommended)
+
 ```bash
 # Clone
-git clone d-harbinger ~/Projects/CinTile
+git clone https://github.com/d-harbinger/CinTile.git ~/Projects/CinTile
 cd ~/Projects/CinTile
 
 # Deploy to Cinnamon
 make deploy
 
-# Enable in Cinnamon Settings → Extensions → CinTile
-# Or restart Cinnamon: make restart
+# Restart Cinnamon
+make restart
+```
+
+### Manual Install
+
+```bash
+# Clone
+git clone https://github.com/d-harbinger/CinTile.git ~/Projects/CinTile
+
+# Deploy to Cinnamon extension directory
+mkdir -p ~/.local/share/cinnamon/extensions/cintile@forgetting.me/
+cp ~/Projects/CinTile/{extension.js,common.js,metadata.json,settings-schema.json,stylesheet.css} \
+  ~/.local/share/cinnamon/extensions/cintile@forgetting.me/
+
+# Restart Cinnamon
+nohup cinnamon --replace &>/dev/null &
+```
+
+Then enable in **Cinnamon Settings → Extensions → CinTile**.
+
+### Verify
+
+```bash
+journalctl /usr/bin/cinnamon -f --no-pager | grep -i cintile
 ```
 
 ## Usage
@@ -33,7 +58,6 @@ make deploy
 | `Escape` | Cancel / hide grid |
 
 Press the same key twice (e.g. `Q Q`) to tile to a single cell.
-
 
 ## File Structure
 
@@ -53,4 +77,3 @@ Press the same key twice (e.g. `Q Q`) to tile to a single cell.
 ## License
 
 GPL-3.0 — same as Cinnamon and Tactile.
-# CinTile
