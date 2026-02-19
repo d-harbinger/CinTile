@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # CinTile — GridWidget.py
 # Visual grid editor for the CinTile settings panel.
-# Reads/writes the extension's JSON config directly (Issue #9336 workaround).
+# Uses Cinnamon's JSONSettingsHandler API for live updates to extension.js.
 # License: GPL-3.0
 
 import json
@@ -35,14 +35,10 @@ class GridWidget(SettingsWidget):
         self.key = key
         self.settings = settings
         self.info = info
-        self._suppress_save = False
 
-        # --- Locate and load config ---
-        self.config_path = os.path.join(
-            GLib.get_user_config_dir(), "cinnamon", "spices", UUID, UUID + ".json"
-        )
-        self.config_data = {}
-        self._load_config()
+        # --- Outer centering wrapper ---
+        outer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        outer.set_halign(Gtk.Align.CENTER)
 
         # --- Build UI ---
         root = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
@@ -98,16 +94,32 @@ class GridWidget(SettingsWidget):
         grid_area.pack_start(right, True, True, 0)
         root.pack_start(grid_area, True, True, 0)
 
-        # Pack root into the SettingsWidget (which is a horizontal Gtk.Box)
-        self.pack_start(root, True, True, 0)
+        # Pack root into outer, outer into SettingsWidget
+        outer.pack_start(root, True, True, 0)
+        self.pack_start(outer, True, True, 0)
 
         # --- Initial render ---
         self._rebuild_controls()
         self._refresh_display()
 
-        # --- Watch for external changes (e.g. spinbutton edits) ---
-        self._monitor = None
-        self._setup_file_monitor()
+    # =========================================================================
+    # Settings API wrappers
+    # =========================================================================
+
+    def _get(self, key, default=0):
+        """Read a value via Cinnamon's settings handler."""
+        try:
+            val = self.settings.get_value(key)
+            return val if val is not None else default
+        except Exception:
+            return default
+
+    def _put(self, key, value):
+        """Write a value via Cinnamon's settings handler (triggers JS callbacks)."""
+        try:
+            self.settings.set_value(key, value)
+        except Exception as e:
+            print("[CinTile GridWidget] set_value error for '%s': %s" % (key, e))
 
     # =========================================================================
     # Helpers
@@ -118,37 +130,6 @@ class GridWidget(SettingsWidget):
         b.set_size_request(28, 28)
         b.connect("clicked", cb, delta)
         return b
-
-    def _load_config(self):
-        try:
-            with open(self.config_path, "r") as f:
-                self.config_data = json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError, PermissionError):
-            self.config_data = {}
-
-    def _save_config(self):
-        if self._suppress_save:
-            return
-        try:
-            with open(self.config_path, "w") as f:
-                json.dump(self.config_data, f, indent=4)
-        except Exception as e:
-            print("[CinTile GridWidget] Save error: %s" % e)
-
-    def _get(self, key, default=0):
-        """Read a value from the loaded config."""
-        entry = self.config_data.get(key)
-        if isinstance(entry, dict) and "value" in entry:
-            return entry["value"]
-        return default
-
-    def _put(self, key, value):
-        """Write a value and persist to disk."""
-        if key in self.config_data and isinstance(self.config_data[key], dict):
-            self.config_data[key]["value"] = value
-        else:
-            self.config_data[key] = {"value": value}
-        self._save_config()
 
     def _rows(self):
         return max(MIN_ROWS, min(MAX_ROWS, self._get("grid-rows", 2)))
@@ -238,7 +219,6 @@ class GridWidget(SettingsWidget):
             box.pack_start(m, False, False, 0)
             box.pack_start(lbl, False, False, 0)
             box.pack_start(p, False, False, 0)
-            # Distribute evenly across the available width
             self.cw_box.pack_start(box, True, False, 0)
 
         # Spacer above row weights to align with col-weight header height
@@ -349,25 +329,3 @@ class GridWidget(SettingsWidget):
         cr.arc(x + r, y + h - r, r, math.pi / 2, math.pi)
         cr.arc(x + r, y + r, r, math.pi, 3 * math.pi / 2)
         cr.close_path()
-
-    # =========================================================================
-    # File monitor — sync when spinbuttons or other sources edit the config
-    # =========================================================================
-
-    def _setup_file_monitor(self):
-        try:
-            gfile = Gio.File.new_for_path(self.config_path)
-            self._monitor = gfile.monitor_file(Gio.FileMonitorFlags.NONE, None)
-            self._monitor.connect("changed", self._on_file_changed)
-        except Exception:
-            pass  # Non-critical; widget still works, just won't auto-refresh
-
-    def _on_file_changed(self, monitor, gfile, other, event_type):
-        if event_type != Gio.FileMonitorEvent.CHANGES_DONE_HINT:
-            return
-        # Reload without triggering a save loop
-        self._suppress_save = True
-        self._load_config()
-        self._rebuild_controls()
-        self._refresh_display()
-        self._suppress_save = False

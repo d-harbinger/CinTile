@@ -1,59 +1,71 @@
-// common.js - Pure utility functions (no Cinnamon dependencies)
+// CinTile — common.js
+// Pure utility functions for weighted grid calculations
+// No Cinnamon dependencies — safe for reuse and testing
+// Algorithm: Tactile (https://gitlab.com/lundal/tactile)
 
 /**
- * Sum all values in an array
+ * Sum all values in an array.
  */
 function sumAll(array) {
-    return array.reduce((sum, val) => sum + val, 0);
+    return array.reduce(function(sum, val) { return sum + val; }, 0);
 }
 
 /**
- * Sum values in array up to (but not including) index
+ * Sum values in array up to (but not including) index.
  */
 function sumUntil(array, index) {
-    return array.slice(0, index).reduce((sum, val) => sum + val, 0);
+    return array.slice(0, index).reduce(function(sum, val) { return sum + val; }, 0);
 }
 
 /**
- * Calculate weighted cell geometry based on Tactile's algorithm
+ * Calculate pixel geometry for a single grid cell using cumulative weights.
+ *
+ * @param {Object} workArea  - {x, y, width, height} of available space
+ * @param {number[]} colWeights - Weight per column (length = number of columns)
+ * @param {number[]} rowWeights - Weight per row (length = number of rows)
+ * @param {number} col - Column index
+ * @param {number} row - Row index
+ * @returns {Object} {x, y, width, height} in absolute pixels
  */
 function calculateCellGeometry(workArea, colWeights, rowWeights, col, row) {
     let totalColWeight = sumAll(colWeights);
     let totalRowWeight = sumAll(rowWeights);
-    
-    // Calculate x position and width using weighted algorithm
+
+    // Guard: if all weights are zero, return a zero-size rect at origin
+    if (totalColWeight === 0 || totalRowWeight === 0) {
+        return { x: workArea.x, y: workArea.y, width: 0, height: 0 };
+    }
+
     let x = Math.floor(workArea.x + (workArea.width * sumUntil(colWeights, col)) / totalColWeight);
     let x2 = Math.floor(workArea.x + (workArea.width * sumUntil(colWeights, col + 1)) / totalColWeight);
-    let width = x2 - x;
-    
-    // Calculate y position and height using weighted algorithm
+
     let y = Math.floor(workArea.y + (workArea.height * sumUntil(rowWeights, row)) / totalRowWeight);
     let y2 = Math.floor(workArea.y + (workArea.height * sumUntil(rowWeights, row + 1)) / totalRowWeight);
-    let height = y2 - y;
-    
-    return { x: x, y: y, width: width, height: height };
+
+    return { x: x, y: y, width: x2 - x, height: y2 - y };
 }
 
 /**
- * Get active column and row weights from config
+ * Extract active column and row weight arrays from the settings config object.
+ * Trims to the configured grid dimensions and replaces undefined values with 0.
+ *
+ * @param {Object} config - Settings object with gridCols, gridRows, col0Weight..col6Weight, row0Weight..row4Weight
+ * @returns {Object} {colWeights: number[], rowWeights: number[]}
  */
 function getActiveWeights(config) {
     let colWeights = [];
     let rowWeights = [];
-    
-    // Load column weights (max 7)
+
     for (let i = 0; i < 7; i++) {
         colWeights.push(config['col' + i + 'Weight'] || 0);
     }
-    
-    // Load row weights (max 5)
+
     for (let i = 0; i < 5; i++) {
         rowWeights.push(config['row' + i + 'Weight'] || 0);
     }
-    
-    // Trim to actual grid size
+
     colWeights = colWeights.slice(0, config.gridCols);
     rowWeights = rowWeights.slice(0, config.gridRows);
-    
+
     return { colWeights: colWeights, rowWeights: rowWeights };
 }

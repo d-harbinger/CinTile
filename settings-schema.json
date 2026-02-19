@@ -29,173 +29,110 @@
     },
     "head-appearance": {
         "type": "header",
-        "description": "Appearance"
+        "description": "Tile Appearance"
     },
-    "window-gap": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 50,
-        "step": 2,
-        "units": "pixels",
-        "description": "Gap between windows",
-        "tooltip": "Pixel gap between tiled windows (0 = no gap)"
-    },
-    "grid-opacity": {
-        "type": "scale",
-        "default": 80,
-        "min": 20,
-        "max": 100,
-        "step": 5,
-        "description": "Grid overlay opacity (%)",
-        "tooltip": "How opaque the grid overlay appears"
-    },
-    "grid-color": {
-        "type": "colorchooser",
-        "default": "rgba(74, 144, 217, 0.3)",
-        "description": "Grid cell color",
-        "tooltip": "Background color of unselected grid cells"
-    },
-    "highlight-color": {
-        "type": "colorchooser",
-        "default": "rgba(255, 200, 0, 0.6)",
-        "description": "Selected cell highlight color",
-        "tooltip": "Background color when a cell is selected as the first tile"
+    "appearance-widget": {
+        "type": "custom",
+        "file": "AppearanceWidget.py",
+        "widget": "AppearanceWidget",
+        "description": "Tile appearance controls",
+        "default": ""
     },
 
-    "sep-advanced": {
-        "type": "separator"
-    },
-    "head-advanced": {
-        "type": "header",
-        "description": "Advanced — Grid Dimensions & Weights"
-    },
     "grid-cols": {
-        "type": "spinbutton",
-        "default": 4,
-        "min": 2,
-        "max": 7,
-        "step": 1,
-        "units": "columns",
-        "description": "Number of grid columns",
-        "tooltip": "Also controllable via the visual editor above"
+        "type": "generic",
+        "default": 4
     },
     "grid-rows": {
-        "type": "spinbutton",
-        "default": 2,
-        "min": 2,
-        "max": 5,
-        "step": 1,
-        "units": "rows",
-        "description": "Number of grid rows",
-        "tooltip": "Also controllable via the visual editor above"
+        "type": "generic",
+        "default": 2
     },
     "col-0-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 1 weight",
-        "tooltip": "Relative width (0 = hidden)"
+        "type": "generic",
+        "default": 1
     },
     "col-1-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 2 weight",
-        "tooltip": "Relative width (0 = hidden)"
+        "type": "generic",
+        "default": 1
     },
     "col-2-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 3 weight",
-        "tooltip": "Relative width (0 = hidden)"
+        "type": "generic",
+        "default": 1
     },
     "col-3-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 4 weight",
-        "tooltip": "Relative width (0 = hidden)"
+        "type": "generic",
+        "default": 1
     },
     "col-4-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 5 weight",
-        "tooltip": "Relative width (0 = hidden)"
+        "type": "generic",
+        "default": 0
     },
     "col-5-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 6 weight",
-        "tooltip": "Relative width (0 = hidden)"
+        "type": "generic",
+        "default": 0
     },
     "col-6-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 7 weight",
-        "tooltip": "Relative width (0 = hidden)"
+        "type": "generic",
+        "default": 0
     },
     "row-0-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 1 weight",
-        "tooltip": "Relative height (0 = hidden)"
+        "type": "generic",
+        "default": 1
     },
     "row-1-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 2 weight",
-        "tooltip": "Relative height (0 = hidden)"
+        "type": "generic",
+        "default": 1
     },
     "row-2-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 3 weight",
-        "tooltip": "Relative height (0 = hidden)"
+        "type": "generic",
+        "default": 0
     },
     "row-3-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 4 weight",
-        "tooltip": "Relative height (0 = hidden)"
+        "type": "generic",
+        "default": 0
     },
     "row-4-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 5 weight",
-        "tooltip": "Relative height (0 = hidden)"
+        "type": "generic",
+        "default": 0
+    },
+    "window-gap": {
+        "type": "generic",
+        "default": 0
+    },
+    "grid-opacity": {
+        "type": "generic",
+        "default": 80
+    },
+    "grid-color": {
+        "type": "generic",
+        "default": "rgba(74, 144, 217, 0.3)"
+    },
+    "highlight-color": {
+        "type": "generic",
+        "default": "rgba(255, 200, 0, 0.6)"
+    },
+    "text-color": {
+        "type": "generic",
+        "default": "rgba(255, 255, 255, 0.9)"
+    },
+    "text-size": {
+        "type": "generic",
+        "default": 48
+    },
+    "border-color": {
+        "type": "generic",
+        "default": "rgba(74, 144, 217, 0.8)"
+    },
+    "border-size": {
+        "type": "generic",
+        "default": 2
+    },
+    "link-colors": {
+        "type": "generic",
+        "default": true
+    },
+    "theme-color": {
+        "type": "generic",
+        "default": "rgba(74, 144, 217, 1.0)"
     }
 }
