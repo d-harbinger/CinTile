@@ -2,7 +2,7 @@
     "uuid": "cintile@forgetting.me",
     "name": "CinTile",
     "description": "Tactile-style keyboard window tiling for Cinnamon",
-    "version": "0.2.0",
-    "url": "https://github.com/d-harbinger/cintile",
-    "cinnamon-version": ["5.0", "5.2", "5.4", "6.0", "6.2", "6.4"]
+    "version": "0.3.0",
+    "url": "https://github.com/d-harbinger/CinTile",
+    "cinnamon-version": ["6.6"]
 }

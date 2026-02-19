@@ -1,17 +1,20 @@
 {
+    "head-keybinding": {
+        "type": "header",
+        "description": "Keybinding"
+    },
     "keybinding": {
         "type": "keybinding",
         "default": "<Super>t",
         "description": "Show tile grid"
     },
-    "grid-rows": {
-        "type": "spinbutton",
-        "default": 2,
-        "min": 2,
-        "max": 5,
-        "step": 1,
-        "units": "rows",
-        "description": "Number of grid rows"
+
+    "sep1": {
+        "type": "separator"
+    },
+    "head-grid": {
+        "type": "header",
+        "description": "Grid Dimensions"
     },
     "grid-cols": {
         "type": "spinbutton",
@@ -20,7 +23,26 @@
         "max": 7,
         "step": 1,
         "units": "columns",
-        "description": "Number of grid columns"
+        "description": "Number of grid columns",
+        "tooltip": "How many columns the grid has (2–7)"
+    },
+    "grid-rows": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "units": "rows",
+        "description": "Number of grid rows",
+        "tooltip": "How many rows the grid has (2–5)"
+    },
+
+    "sep2": {
+        "type": "separator"
+    },
+    "head-col-weights": {
+        "type": "header",
+        "description": "Column Weights"
     },
     "col-0-weight": {
         "type": "spinbutton",
@@ -28,7 +50,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Column 0 weight (0=hidden)"
+        "description": "Column 1 weight",
+        "tooltip": "Relative width of column 1 (0 = hidden)"
     },
     "col-1-weight": {
         "type": "spinbutton",
@@ -36,7 +59,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Column 1 weight"
+        "description": "Column 2 weight",
+        "tooltip": "Relative width of column 2 (0 = hidden)"
     },
     "col-2-weight": {
         "type": "spinbutton",
@@ -44,7 +68,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Column 2 weight"
+        "description": "Column 3 weight",
+        "tooltip": "Relative width of column 3 (0 = hidden)"
     },
     "col-3-weight": {
         "type": "spinbutton",
@@ -52,7 +77,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Column 3 weight"
+        "description": "Column 4 weight",
+        "tooltip": "Relative width of column 4 (0 = hidden)"
     },
     "col-4-weight": {
         "type": "spinbutton",
@@ -60,7 +86,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Column 4 weight"
+        "description": "Column 5 weight",
+        "tooltip": "Relative width of column 5 (0 = hidden)"
     },
     "col-5-weight": {
         "type": "spinbutton",
@@ -68,7 +95,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Column 5 weight"
+        "description": "Column 6 weight",
+        "tooltip": "Relative width of column 6 (0 = hidden)"
     },
     "col-6-weight": {
         "type": "spinbutton",
@@ -76,7 +104,16 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Column 6 weight"
+        "description": "Column 7 weight",
+        "tooltip": "Relative width of column 7 (0 = hidden)"
+    },
+
+    "sep3": {
+        "type": "separator"
+    },
+    "head-row-weights": {
+        "type": "header",
+        "description": "Row Weights"
     },
     "row-0-weight": {
         "type": "spinbutton",
@@ -84,7 +121,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Row 0 weight (0=hidden)"
+        "description": "Row 1 weight",
+        "tooltip": "Relative height of row 1 (0 = hidden)"
     },
     "row-1-weight": {
         "type": "spinbutton",
@@ -92,7 +130,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Row 1 weight"
+        "description": "Row 2 weight",
+        "tooltip": "Relative height of row 2 (0 = hidden)"
     },
     "row-2-weight": {
         "type": "spinbutton",
@@ -100,7 +139,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Row 2 weight"
+        "description": "Row 3 weight",
+        "tooltip": "Relative height of row 3 (0 = hidden)"
     },
     "row-3-weight": {
         "type": "spinbutton",
@@ -108,7 +148,8 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Row 3 weight"
+        "description": "Row 4 weight",
+        "tooltip": "Relative height of row 4 (0 = hidden)"
     },
     "row-4-weight": {
         "type": "spinbutton",
@@ -116,7 +157,16 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "description": "Row 4 weight"
+        "description": "Row 5 weight",
+        "tooltip": "Relative height of row 5 (0 = hidden)"
+    },
+
+    "sep4": {
+        "type": "separator"
+    },
+    "head-appearance": {
+        "type": "header",
+        "description": "Appearance"
     },
     "window-gap": {
         "type": "spinbutton",
@@ -125,7 +175,8 @@
         "max": 50,
         "step": 2,
         "units": "pixels",
-        "description": "Gap between windows"
+        "description": "Gap between windows",
+        "tooltip": "Pixel gap between tiled windows (0 = no gap)"
     },
     "grid-opacity": {
         "type": "scale",
@@ -133,16 +184,19 @@
         "min": 20,
         "max": 100,
         "step": 5,
-        "description": "Grid overlay opacity (%)"
+        "description": "Grid overlay opacity (%)",
+        "tooltip": "How opaque the grid overlay appears"
     },
     "grid-color": {
         "type": "colorchooser",
         "default": "rgba(74, 144, 217, 0.3)",
-        "description": "Grid cell color"
+        "description": "Grid cell color",
+        "tooltip": "Background color of unselected grid cells"
     },
     "highlight-color": {
         "type": "colorchooser",
         "default": "rgba(255, 200, 0, 0.6)",
-        "description": "Selected cell highlight color"
+        "description": "Selected cell highlight color",
+        "tooltip": "Background color when a cell is selected as the first tile"
     }
 }
