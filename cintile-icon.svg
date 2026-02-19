@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <!-- Top-left: deep cinnamon bark -->
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B4513"/>
+      <stop offset="100%" stop-color="#A0522D"/>
+    </linearGradient>
+    <!-- Top-right: warm sienna -->
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B5651D"/>
+      <stop offset="100%" stop-color="#CD853F"/>
+    </linearGradient>
+    <!-- Bottom-left: spiced amber -->
+    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D2691E"/>
+      <stop offset="100%" stop-color="#E8943A"/>
+    </linearGradient>
+    <!-- Bottom-right: golden cinnamon -->
+    <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DAA520"/>
+      <stop offset="100%" stop-color="#F0C75E"/>
+    </linearGradient>
+    <!-- Subtle outer glow -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#5C2E00" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- 2x2 grid with 3px gap, 4px margin, rounded corners -->
+  <g filter="url(#shadow)">
+    <!-- Top-left tile -->
+    <rect x="4" y="4" width="26" height="26" rx="3" ry="3" fill="url(#g1)"/>
+    <!-- Top-right tile -->
+    <rect x="34" y="4" width="26" height="26" rx="3" ry="3" fill="url(#g2)"/>
+    <!-- Bottom-left tile -->
+    <rect x="4" y="34" width="26" height="26" rx="3" ry="3" fill="url(#g3)"/>
+    <!-- Bottom-right tile -->
+    <rect x="34" y="34" width="26" height="26" rx="3" ry="3" fill="url(#g4)"/>
+  </g>
+</svg>

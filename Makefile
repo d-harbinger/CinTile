@@ -1,6 +1,6 @@
 UUID = cintile@forgetting.me
 EXT_DIR = $(HOME)/.local/share/cinnamon/extensions/$(UUID)
-SRC_FILES = extension.js common.js metadata.json settings-schema.json
+SRC_FILES = extension.js common.js metadata.json settings-schema.json icon.png
 
 .PHONY: deploy restart logs clean
 
