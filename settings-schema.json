@@ -9,159 +9,22 @@
         "description": "Show tile grid"
     },
 
-    "sep1": {
+    "sep-grid": {
         "type": "separator"
     },
     "head-grid": {
         "type": "header",
-        "description": "Grid Dimensions"
+        "description": "Grid Layout"
     },
-    "grid-cols": {
-        "type": "spinbutton",
-        "default": 4,
-        "min": 2,
-        "max": 7,
-        "step": 1,
-        "units": "columns",
-        "description": "Number of grid columns",
-        "tooltip": "How many columns the grid has (2–7)"
-    },
-    "grid-rows": {
-        "type": "spinbutton",
-        "default": 2,
-        "min": 2,
-        "max": 5,
-        "step": 1,
-        "units": "rows",
-        "description": "Number of grid rows",
-        "tooltip": "How many rows the grid has (2–5)"
+    "grid-widget": {
+        "type": "custom",
+        "file": "GridWidget.py",
+        "widget": "GridWidget",
+        "description": "Visual grid editor",
+        "default": ""
     },
 
-    "sep2": {
-        "type": "separator"
-    },
-    "head-col-weights": {
-        "type": "header",
-        "description": "Column Weights"
-    },
-    "col-0-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 1 weight",
-        "tooltip": "Relative width of column 1 (0 = hidden)"
-    },
-    "col-1-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 2 weight",
-        "tooltip": "Relative width of column 2 (0 = hidden)"
-    },
-    "col-2-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 3 weight",
-        "tooltip": "Relative width of column 3 (0 = hidden)"
-    },
-    "col-3-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 4 weight",
-        "tooltip": "Relative width of column 4 (0 = hidden)"
-    },
-    "col-4-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 5 weight",
-        "tooltip": "Relative width of column 5 (0 = hidden)"
-    },
-    "col-5-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 6 weight",
-        "tooltip": "Relative width of column 6 (0 = hidden)"
-    },
-    "col-6-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Column 7 weight",
-        "tooltip": "Relative width of column 7 (0 = hidden)"
-    },
-
-    "sep3": {
-        "type": "separator"
-    },
-    "head-row-weights": {
-        "type": "header",
-        "description": "Row Weights"
-    },
-    "row-0-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 1 weight",
-        "tooltip": "Relative height of row 1 (0 = hidden)"
-    },
-    "row-1-weight": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 2 weight",
-        "tooltip": "Relative height of row 2 (0 = hidden)"
-    },
-    "row-2-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 3 weight",
-        "tooltip": "Relative height of row 3 (0 = hidden)"
-    },
-    "row-3-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 4 weight",
-        "tooltip": "Relative height of row 4 (0 = hidden)"
-    },
-    "row-4-weight": {
-        "type": "spinbutton",
-        "default": 0,
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "description": "Row 5 weight",
-        "tooltip": "Relative height of row 5 (0 = hidden)"
-    },
-
-    "sep4": {
+    "sep-appearance": {
         "type": "separator"
     },
     "head-appearance": {
@@ -198,5 +61,141 @@
         "default": "rgba(255, 200, 0, 0.6)",
         "description": "Selected cell highlight color",
         "tooltip": "Background color when a cell is selected as the first tile"
+    },
+
+    "sep-advanced": {
+        "type": "separator"
+    },
+    "head-advanced": {
+        "type": "header",
+        "description": "Advanced — Grid Dimensions & Weights"
+    },
+    "grid-cols": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 2,
+        "max": 7,
+        "step": 1,
+        "units": "columns",
+        "description": "Number of grid columns",
+        "tooltip": "Also controllable via the visual editor above"
+    },
+    "grid-rows": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "units": "rows",
+        "description": "Number of grid rows",
+        "tooltip": "Also controllable via the visual editor above"
+    },
+    "col-0-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 1 weight",
+        "tooltip": "Relative width (0 = hidden)"
+    },
+    "col-1-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 2 weight",
+        "tooltip": "Relative width (0 = hidden)"
+    },
+    "col-2-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 3 weight",
+        "tooltip": "Relative width (0 = hidden)"
+    },
+    "col-3-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 4 weight",
+        "tooltip": "Relative width (0 = hidden)"
+    },
+    "col-4-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 5 weight",
+        "tooltip": "Relative width (0 = hidden)"
+    },
+    "col-5-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 6 weight",
+        "tooltip": "Relative width (0 = hidden)"
+    },
+    "col-6-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Column 7 weight",
+        "tooltip": "Relative width (0 = hidden)"
+    },
+    "row-0-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 1 weight",
+        "tooltip": "Relative height (0 = hidden)"
+    },
+    "row-1-weight": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 2 weight",
+        "tooltip": "Relative height (0 = hidden)"
+    },
+    "row-2-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 3 weight",
+        "tooltip": "Relative height (0 = hidden)"
+    },
+    "row-3-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 4 weight",
+        "tooltip": "Relative height (0 = hidden)"
+    },
+    "row-4-weight": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Row 5 weight",
+        "tooltip": "Relative height (0 = hidden)"
     }
 }
