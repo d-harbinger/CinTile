@@ -6,3 +6,5 @@ __pycache__/
 .vscode/
 *.bak
 setup-git.sh
+nohup.out
+*.code-workspace*.code-workspace
