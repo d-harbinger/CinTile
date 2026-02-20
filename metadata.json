@@ -4,5 +4,6 @@
     "description": "Tactile-style keyboard window tiling for Cinnamon",
     "version": "0.3.0",
     "url": "https://github.com/d-harbinger/CinTile",
-    "cinnamon-version": ["6.6"]
+    "cinnamon-version": ["6.6"],
+    "icon": "view-grid-symbolic"
 }

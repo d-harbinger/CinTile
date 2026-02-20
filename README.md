@@ -33,7 +33,7 @@ git clone https://github.com/d-harbinger/CinTile.git ~/Projects/CinTile
 
 # Deploy to Cinnamon extension directory
 mkdir -p ~/.local/share/cinnamon/extensions/cintile@forgetting.me/
-cp ~/Projects/CinTile/{extension.js,common.js,metadata.json,settings-schema.json,stylesheet.css} \
+cp ~/Projects/CinTile/{extension.js,common.js,metadata.json,settings-schema.json} \
   ~/.local/share/cinnamon/extensions/cintile@forgetting.me/
 
 # Restart Cinnamon
