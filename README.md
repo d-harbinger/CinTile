@@ -42,19 +42,6 @@ git pull
 make deploy-restart
 ```
 
-### Migrating from cintile@forgetting.me
-
-If you have the old UUID installed, remove it first:
-
-```bash
-rm -rf ~/.local/share/cinnamon/extensions/cintile@forgetting.me/
-# Optional: carry over your settings
-cp -r ~/.cinnamon/configs/cintile@forgetting.me/ ~/.cinnamon/configs/cintile@d-harbinger/
-cd ~/Projects/CinTile
-git pull
-make deploy-restart
-```
-
 ### Verify
 
 ```bash
