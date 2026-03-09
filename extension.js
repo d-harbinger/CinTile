@@ -26,12 +26,11 @@ let focusedWindow = null;
 
 // Key codes for grid cell assignment (left-to-right, top-to-bottom)
 const AVAILABLE_KEYS = [
-    Clutter.KEY_q, Clutter.KEY_w, Clutter.KEY_e, Clutter.KEY_r,
-    Clutter.KEY_a, Clutter.KEY_s, Clutter.KEY_d, Clutter.KEY_f,
-    Clutter.KEY_z, Clutter.KEY_x, Clutter.KEY_c, Clutter.KEY_v,
-    Clutter.KEY_t, Clutter.KEY_y, Clutter.KEY_g, Clutter.KEY_h,
-    Clutter.KEY_u, Clutter.KEY_i, Clutter.KEY_j, Clutter.KEY_k,
-    Clutter.KEY_b, Clutter.KEY_n, Clutter.KEY_o, Clutter.KEY_p
+    [Clutter.KEY_q, Clutter.KEY_w, Clutter.KEY_e, Clutter.KEY_r, Clutter.KEY_t, Clutter.KEY_y, Clutter.KEY_u],
+    [Clutter.KEY_a, Clutter.KEY_s, Clutter.KEY_d, Clutter.KEY_f, Clutter.KEY_g, Clutter.KEY_h, Clutter.KEY_j],
+    [Clutter.KEY_z, Clutter.KEY_x, Clutter.KEY_c, Clutter.KEY_v, Clutter.KEY_b, Clutter.KEY_n, Clutter.KEY_m],
+    [Clutter.KEY_i, Clutter.KEY_o, Clutter.KEY_p, Clutter.KEY_bracketleft, Clutter.KEY_bracketright, Clutter.KEY_backslash],
+    [Clutter.KEY_k, Clutter.KEY_l, Clutter.KEY_semicolon, Clutter.KEY_apostrophe]
 ];
 
 // Display labels matching AVAILABLE_KEYS (row-major order, max 7 cols × 5 rows)
@@ -49,16 +48,13 @@ const KEY_LABELS = [
 
 function buildKeyMap() {
     KEY_MAP = {};
-    let keyIndex = 0;
     let weights = Common.getActiveWeights(config);
 
-    for (let row = 0; row < config.gridRows && keyIndex < AVAILABLE_KEYS.length; row++) {
-        for (let col = 0; col < config.gridCols && keyIndex < AVAILABLE_KEYS.length; col++) {
-            if (weights.colWeights[col] < 1 || weights.rowWeights[row] < 1) {
-                continue;
-            }
-            KEY_MAP[AVAILABLE_KEYS[keyIndex]] = { row: row, col: col };
-            keyIndex++;
+    for (let row = 0; row < config.gridRows && row < AVAILABLE_KEYS.length; row++) {
+        if (weights.rowWeights[row] < 1) continue;
+        for (let col = 0; col < config.gridCols && col < AVAILABLE_KEYS[row].length; col++) {
+            if (weights.colWeights[col] < 1) continue;
+            KEY_MAP[AVAILABLE_KEYS[row][col]] = { row: row, col: col };
         }
     }
 }
