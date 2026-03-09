@@ -138,5 +138,9 @@
     "show-highlight": {
         "type": "generic",
         "default": true
+    },
+    "key-bindings": {
+        "type": "generic",
+        "default": "{}"
     }
 }

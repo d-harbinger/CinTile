@@ -24,14 +24,14 @@ let KEY_MAP = {};
 let currentMonitorIndex = 0;
 let focusedWindow = null;
 
-// Key codes for grid cell assignment (left-to-right, top-to-bottom)
+// Default key codes for grid cell assignment — matches physical keyboard layout
 const AVAILABLE_KEYS = [
     [Clutter.KEY_q, Clutter.KEY_w, Clutter.KEY_e, Clutter.KEY_r, Clutter.KEY_t, Clutter.KEY_y, Clutter.KEY_u],
     [Clutter.KEY_a, Clutter.KEY_s, Clutter.KEY_d, Clutter.KEY_f, Clutter.KEY_g, Clutter.KEY_h, Clutter.KEY_j],
     [Clutter.KEY_z, Clutter.KEY_x, Clutter.KEY_c, Clutter.KEY_v, Clutter.KEY_b, Clutter.KEY_n, Clutter.KEY_m]
 ];
 
-// Display labels matching AVAILABLE_KEYS (row-major order, max 7 cols × 5 rows)
+// Default display labels matching AVAILABLE_KEYS (3 rows × 7 cols max)
 const KEY_LABELS = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J'],
@@ -45,12 +45,17 @@ const KEY_LABELS = [
 function buildKeyMap() {
     KEY_MAP = {};
     let weights = Common.getActiveWeights(config);
+    let bindings = {};
+    try { bindings = JSON.parse(settings.getValue("key-bindings") || "{}"); } catch(e) {}
 
     for (let row = 0; row < config.gridRows && row < AVAILABLE_KEYS.length; row++) {
         if (weights.rowWeights[row] < 1) continue;
         for (let col = 0; col < config.gridCols && col < AVAILABLE_KEYS[row].length; col++) {
             if (weights.colWeights[col] < 1) continue;
-            KEY_MAP[AVAILABLE_KEYS[row][col]] = { row: row, col: col };
+
+            let custom = bindings[row + '-' + col];
+            let keyCode = custom && custom.code ? custom.code : AVAILABLE_KEYS[row][col];
+            KEY_MAP[keyCode] = { row: row, col: col };
         }
     }
 }
@@ -100,6 +105,7 @@ function init(metadata) {
     settings.bindProperty(Settings.BindingDirection.IN, "border-color", "borderColor", onSettingsChanged, null);
     settings.bindProperty(Settings.BindingDirection.IN, "border-size", "borderSize", onSettingsChanged, null);
     settings.bindProperty(Settings.BindingDirection.IN, "show-highlight", "showHighlight", onSettingsChanged, null);
+    settings.bindProperty(Settings.BindingDirection.IN, "key-bindings", "keyBindings", onSettingsChanged, null);
 
     buildKeyMap();
 }
@@ -163,6 +169,8 @@ function displayGridOnMonitor(monitorIndex) {
 
     let monitor = monitors[monitorIndex];
     let weights = Common.getActiveWeights(config);
+    let bindings = {};
+    try { bindings = JSON.parse(settings.getValue("key-bindings") || "{}"); } catch(e) {}
 
     // Safe defaults for appearance properties
     let textColor = config.textColor || 'rgba(255, 255, 255, 0.9)';
@@ -216,9 +224,11 @@ function displayGridOnMonitor(monitorIndex) {
             cell.set_position(geom.x, geom.y);
             cell.set_size(geom.width, geom.height);
 
-            if (KEY_LABELS[row] && KEY_LABELS[row][col]) {
+            let customKey = bindings[row + '-' + col];
+            let labelText = customKey && customKey.label ? customKey.label : (KEY_LABELS[row] && KEY_LABELS[row][col] ? KEY_LABELS[row][col] : '');
+            if (labelText) {
                 let label = new St.Label({
-                    text: KEY_LABELS[row][col],
+                    text: labelText,
                     style: 'font-size: ' + textSize + 'px; color: ' + textColor + '; font-weight: bold;'
                 });
                 label.set_x_align(Clutter.ActorAlign.CENTER);
