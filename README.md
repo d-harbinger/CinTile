@@ -9,6 +9,7 @@ Keyboard-driven window tiling for the Cinnamon desktop environment. A port of [T
 - **Multi-monitor**: Spacebar cycles the grid overlay between monitors
 - **Visual grid editor**: Proportional cell preview with rows/columns and per-axis weight adjustment
 - **Appearance controls**: Color theming (linked and unlinked modes), text size, border size, gap size, overlay opacity
+- **Custom key bindings**: Click any grid cell and press a key to assign it — fully remappable layout
 - **Configurable keybinding**: Default `Super+T`, changeable via Cinnamon Settings
 
 ## Install
@@ -60,17 +61,17 @@ Press the same key twice (e.g. `Q Q`) to tile to a single cell. Press two differ
 
 ### Key Layout
 
-Keys map directly to the physical keyboard layout, scaling with grid size:
+Default keys map directly to the physical keyboard layout, scaling with grid size:
 
 ```
 Row 0:  Q  W  E  R  T  Y  U
 Row 1:  A  S  D  F  G  H  J
 Row 2:  Z  X  C  V  B  N  M
-Row 3:  I  O  P  [  ]  \
-Row 4:  K  L  ;  '
 ```
 
 A 2×4 grid uses Q W E R / A S D F. A 3×5 grid uses Q W E R T / A S D F G / Z X C V B. And so on.
+
+To customize, click any cell in the Grid Layout settings widget and press a key to assign it. Right-click or press Delete to revert a cell to its default. Use the "Reset All" button to clear all custom bindings.
 
 ## File Structure
 
