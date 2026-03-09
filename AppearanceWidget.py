@@ -10,7 +10,7 @@ import os
 from gi.repository import Gtk, Gdk, GLib, Gio
 from JsonSettingsWidgets import SettingsWidget
 
-UUID = "cintile@forgetting.me"
+UUID = "cintile@d-harbinger"
 
 DEFAULTS = {
     "text-color":       "rgba(255, 255, 255, 0.9)",

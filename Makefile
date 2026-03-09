@@ -1,4 +1,4 @@
-UUID = cintile@forgetting.me
+UUID = cintile@d-harbinger
 EXT_DIR = $(HOME)/.local/share/cinnamon/extensions/$(UUID)
 SRC_FILES = extension.js common.js metadata.json settings-schema.json icon.png GridWidget.py AppearanceWidget.py
 

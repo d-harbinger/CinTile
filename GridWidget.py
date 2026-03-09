@@ -10,7 +10,7 @@ import os
 from gi.repository import Gtk, Gdk, GLib, Pango, PangoCairo
 from JsonSettingsWidgets import SettingsWidget
 
-UUID = "cintile@forgetting.me"
+UUID = "cintile@d-harbinger"
 
 # Must match extension.js KEY_LABELS exactly
 KEY_LABELS = [

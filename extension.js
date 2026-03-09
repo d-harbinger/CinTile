@@ -1,6 +1,6 @@
 // CinTile — Keyboard-driven window tiling for Cinnamon
 // A port of Tactile (GNOME) with weighted grid support
-// UUID: cintile@forgetting.me
+// UUID: cintile@d-harbinger
 // License: GPL-3.0
 // https://github.com/d-harbinger/CinTile
 
@@ -12,7 +12,7 @@ const GLib = imports.gi.GLib;
 const Settings = imports.ui.settings;
 
 const ExtensionSystem = imports.ui.extensionSystem;
-const Common = ExtensionSystem.extensions['cintile@forgetting.me'].common;
+const Common = ExtensionSystem.extensions['cintile@d-harbinger'].common;
 
 // Extension state
 let config = null;

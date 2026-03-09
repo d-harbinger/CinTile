@@ -8,3 +8,4 @@ __pycache__/
 setup-git.sh
 nohup.out
 *.code-workspace
+nohup.out

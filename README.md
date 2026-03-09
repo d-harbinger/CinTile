@@ -5,42 +5,41 @@ Keyboard-driven window tiling for the Cinnamon desktop environment. A port of [T
 ## Features
 
 - **Two-key tiling**: Press `Super+T` to show grid, press two keys to tile the focused window between those cells
-- **Weighted grid**: Up to 7×5 grid with per-column and per-row weight control
+- **Weighted grid**: Up to 7×5 grid with per-column and per-row weight control for non-uniform layouts
 - **Multi-monitor**: Spacebar cycles the grid overlay between monitors
-- **Configurable**: Grid colors, opacity, window gaps, and keybinding via Cinnamon Settings
+- **Visual grid editor**: Proportional cell preview with rows/columns and per-axis weight adjustment
+- **Appearance controls**: Color theming (linked and unlinked modes), text size, border size, gap size, overlay opacity
+- **Configurable keybinding**: Default `Super+T`, changeable via Cinnamon Settings
 
 ## Install
 
 ### Using Make (recommended)
 
 ```bash
-# Clone
 git clone https://github.com/d-harbinger/CinTile.git ~/Projects/CinTile
 cd ~/Projects/CinTile
-
-# Deploy to Cinnamon
-make deploy
-
-# Restart Cinnamon
-make restart
+make deploy-restart
 ```
 
 ### Manual Install
 
 ```bash
-# Clone
 git clone https://github.com/d-harbinger/CinTile.git ~/Projects/CinTile
-
-# Deploy to Cinnamon extension directory
-mkdir -p ~/.local/share/cinnamon/extensions/cintile@forgetting.me/
-cp ~/Projects/CinTile/{extension.js,common.js,metadata.json,settings-schema.json} \
-  ~/.local/share/cinnamon/extensions/cintile@forgetting.me/
-
-# Restart Cinnamon
+mkdir -p ~/.local/share/cinnamon/extensions/cintile@d-harbinger/
+cp ~/Projects/CinTile/{extension.js,common.js,metadata.json,settings-schema.json,icon.png,GridWidget.py,AppearanceWidget.py} \
+  ~/.local/share/cinnamon/extensions/cintile@d-harbinger/
 nohup cinnamon --replace &>/dev/null &
 ```
 
 Then enable in **Cinnamon Settings → Extensions → CinTile**.
+
+### Updating
+
+```bash
+cd ~/Projects/CinTile
+git pull
+make deploy-restart
+```
 
 ### Verify
 
@@ -53,11 +52,25 @@ journalctl /usr/bin/cinnamon -f --no-pager | grep -i cintile
 | Key | Action |
 |---|---|
 | `Super+T` | Toggle grid overlay |
-| `Q W E R ...` | Select first tile, then second tile |
+| `Q W E R T ...` | Select first tile, then second tile |
 | `Spacebar` | Cycle grid to next monitor |
 | `Escape` | Cancel / hide grid |
 
-Press the same key twice (e.g. `Q Q`) to tile to a single cell.
+Press the same key twice (e.g. `Q Q`) to tile to a single cell. Press two different keys (e.g. `Q F`) to tile across the spanning area between those cells.
+
+### Key Layout
+
+Keys map directly to the physical keyboard layout, scaling with grid size:
+
+```
+Row 0:  Q  W  E  R  T  Y  U
+Row 1:  A  S  D  F  G  H  J
+Row 2:  Z  X  C  V  B  N  M
+Row 3:  I  O  P  [  ]  \
+Row 4:  K  L  ;  '
+```
+
+A 2×4 grid uses Q W E R / A S D F. A 3×5 grid uses Q W E R T / A S D F G / Z X C V B. And so on.
 
 ## File Structure
 
@@ -67,12 +80,33 @@ Press the same key twice (e.g. `Q Q`) to tile to a single cell.
 | `common.js` | Pure utility functions — weighted grid math |
 | `metadata.json` | Extension identity and version compatibility |
 | `settings-schema.json` | Configuration UI definition |
-| `stylesheet.css` | Reserved for CSS-based theming |
+| `GridWidget.py` | Custom Python GTK3 widget for visual grid editor |
+| `AppearanceWidget.py` | Custom Python GTK3 widget for appearance controls |
+| `icon.png` | 64×64 extension icon |
+| `cintile-icon.svg` | SVG source for icon |
+| `Makefile` | deploy / restart / logs targets |
 
-## Known Issues / TODO
+## Makefile Targets
 
-- Settings UI uses spinbuttons for weight config — planned: visual grid editor widget
-- Cinnamon Issue [#9336](https://github.com/linuxmint/cinnamon/issues/9336) prevents custom widgets from binding to JS code
+| Target | Action |
+|---|---|
+| `make deploy` | Copy extension files to Cinnamon extensions directory |
+| `make restart` | Restart Cinnamon |
+| `make deploy-restart` | Deploy then restart |
+| `make logs` | Tail Cinnamon journal filtered to CinTile |
+| `make clean` | Remove extension from Cinnamon extensions directory |
+
+## Technical Notes
+
+- Settings use Cinnamon's `Settings.ExtensionSettings` with `bindProperty` for real-time JS updates
+- Custom Python widgets write directly to the settings JSON file as a workaround for [Cinnamon Issue #9336](https://github.com/linuxmint/cinnamon/issues/9336) (custom widgets can't bind to JavaScript)
+- Window positioning uses `GLib.idle_add()` for reliability
+- Grid math uses Tactile's cumulative-weight algorithm via `common.js`
+
+## Roadmap
+
+- Cinnamon Spices store submission (requires `UUID/files/UUID/` restructure, `info.json`, `screenshot.png`)
+- Localization support
 
 ## License
 
