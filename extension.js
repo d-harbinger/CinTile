@@ -28,18 +28,14 @@ let focusedWindow = null;
 const AVAILABLE_KEYS = [
     [Clutter.KEY_q, Clutter.KEY_w, Clutter.KEY_e, Clutter.KEY_r, Clutter.KEY_t, Clutter.KEY_y, Clutter.KEY_u],
     [Clutter.KEY_a, Clutter.KEY_s, Clutter.KEY_d, Clutter.KEY_f, Clutter.KEY_g, Clutter.KEY_h, Clutter.KEY_j],
-    [Clutter.KEY_z, Clutter.KEY_x, Clutter.KEY_c, Clutter.KEY_v, Clutter.KEY_b, Clutter.KEY_n, Clutter.KEY_m],
-    [Clutter.KEY_i, Clutter.KEY_o, Clutter.KEY_p, Clutter.KEY_bracketleft, Clutter.KEY_bracketright, Clutter.KEY_backslash],
-    [Clutter.KEY_k, Clutter.KEY_l, Clutter.KEY_semicolon, Clutter.KEY_apostrophe]
+    [Clutter.KEY_z, Clutter.KEY_x, Clutter.KEY_c, Clutter.KEY_v, Clutter.KEY_b, Clutter.KEY_n, Clutter.KEY_m]
 ];
 
 // Display labels matching AVAILABLE_KEYS (row-major order, max 7 cols × 5 rows)
 const KEY_LABELS = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J'],
-    ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-    ['I', 'O', 'P', '[', ']', '\\', ''],
-    ['K', 'L', ';', "'", '', '', '']
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
 ];
 
 // =============================================================================

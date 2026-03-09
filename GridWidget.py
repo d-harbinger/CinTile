@@ -16,13 +16,11 @@ UUID = "cintile@d-harbinger"
 KEY_LABELS = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J'],
-    ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-    ['I', 'O', 'P', '[', ']', '\\', ''],
-    ['K', 'L', ';', "'", '', '', '']
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
 ]
 
 # Limits matching settings-schema.json
-MIN_ROWS, MAX_ROWS = 2, 5
+MIN_ROWS, MAX_ROWS = 2, 3
 MIN_COLS, MAX_COLS = 2, 7
 MIN_WEIGHT, MAX_WEIGHT = 0, 10
 
