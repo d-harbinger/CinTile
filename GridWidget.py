@@ -5,12 +5,10 @@
 # License: GPL-3.0
 
 import json
-import os
+import math
 
-from gi.repository import Gtk, Gdk, GLib, Pango, PangoCairo
+from gi.repository import Gtk, Gdk, Pango, PangoCairo
 from JsonSettingsWidgets import SettingsWidget
-
-UUID = "cintile@d-harbinger"
 
 # Default key labels — used when no custom binding exists
 DEFAULT_LABELS = [
@@ -531,7 +529,6 @@ class GridWidget(SettingsWidget):
     @staticmethod
     def _rounded_rect(cr, x, y, w, h, r):
         """Draw a rounded rectangle path."""
-        import math
         cr.new_sub_path()
         cr.arc(x + w - r, y + r, r, -math.pi / 2, 0)
         cr.arc(x + w - r, y + h - r, r, 0, math.pi / 2)

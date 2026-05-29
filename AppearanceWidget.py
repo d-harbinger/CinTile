@@ -4,13 +4,8 @@
 # Uses Cinnamon's JSONSettingsHandler API for live updates to extension.js.
 # License: GPL-3.0
 
-import json
-import os
-
-from gi.repository import Gtk, Gdk, GLib, Gio
+from gi.repository import Gtk, Gdk
 from JsonSettingsWidgets import SettingsWidget
-
-UUID = "cintile@d-harbinger"
 
 DEFAULTS = {
     "text-color":       "rgba(255, 255, 255, 0.9)",
@@ -34,7 +29,6 @@ class AppearanceWidget(SettingsWidget):
         self.key = key
         self.settings = settings
         self.info = info
-        self._suppress_handler = False
 
         # Widget references for external-change refresh
         self._color_buttons = {}  # key -> Gtk.ColorButton
@@ -270,8 +264,6 @@ class AppearanceWidget(SettingsWidget):
     # =========================================================================
 
     def _on_color_set(self, btn, key):
-        if self._suppress_handler:
-            return
         rgba = btn.get_rgba()
         value = "rgba(%d, %d, %d, %.2f)" % (
             int(round(rgba.red * 255)),
@@ -286,6 +278,4 @@ class AppearanceWidget(SettingsWidget):
             self._apply_theme_color()
 
     def _on_spin_changed(self, spin, key):
-        if self._suppress_handler:
-            return
         self._put(key, int(spin.get_value()))

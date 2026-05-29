@@ -178,7 +178,6 @@ function displayGridOnMonitor(monitorIndex) {
     let borderColor = config.borderColor || 'rgba(74, 144, 217, 0.8)';
     let borderSize = config.borderSize != null ? config.borderSize : 2;
     let gridColor = config.gridColor || 'rgba(74, 144, 217, 0.3)';
-    let highlightColor = config.highlightColor || 'rgba(255, 200, 0, 0.6)';
     let gridOpacity = config.gridOpacity || 80;
 
     gridOverlay = new St.Widget({
