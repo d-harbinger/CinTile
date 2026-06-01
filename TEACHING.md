@@ -1,6 +1,6 @@
 # TEACHING.md — CinTile
 
-Per-project AI-codegen slop audit for the `/mnt/Projects` library cleanup. Two jobs at once:
+Per-project AI-codegen slop audit for the workspace library cleanup. Two jobs at once:
 (1) find this project's slop, taught with **the repo's own code** as the examples; (2) record
 *what Claude did and why*, so a later learning pass (via the `bionic` tool) can read the reasoning,
 not just the result.
@@ -11,6 +11,32 @@ CinTile is a Cinnamon desktop extension: a keyboard-driven window tiler (a port 
 **PyGObject/GTK3** (`GridWidget.py`, `AppearanceWidget.py`). That two-runtime split is the
 single most important fact for reading the findings below — half the "duplication" is a real
 language boundary, not laziness, and the audit has to tell the two apart.
+
+---
+
+## Re-audit — 2026-06-01 (shape pass, no source changes)
+
+Re-ran the classification and re-read every file. **Verdict unchanged: shape pass, security n/a.**
+
+**Why no security pass.** CinTile has no remote attack surface. There is no HTTP server, no SSR,
+no API routes, no network client, no database, no subprocess spawned from input, no authentication,
+and no secret handling. The only "input" is the logged-in user configuring their own desktop
+through Cinnamon's settings UI. The one place external data crosses into a sink is settings color
+and size strings flowing into Clutter/St `set_style()` CSS (`extension.js` lines 195, 219–222,
+231, 336–347) and into the Python Cairo preview — but Clutter CSS is a styling grammar with no
+`url()` fetch and no script execution, the values originate from the same user running the shell,
+and a malformed string degrades to a no-op render, not code execution. An actor able to write
+those settings already controls the user's session. So there is no untrusted-input path to trace;
+a security audit doc would have nothing to analyze. Classification stays SHAPE.
+
+**State vs. the 2026-05-29 findings:** finding #2 (dead imports / `UUID` / `_suppress_handler` /
+stray `highlightColor`) remains applied and committed (`69c2115`). Findings #1 (4-source
+appearance defaults) and #3 (tripled cell-style string) are **still present and still host-gated**
+— they live in `extension.js`, which only loads under Cinnamon's GJS runtime; `node --check` proves
+syntax, not behavior, so a behavior-preserving refactor there cannot be verified green in a
+display-less VM and is not applied. Re-verified this pass: `py_compile` clean on both widgets,
+`node --check` clean on both JS files. This pass also corrected drift inside this document itself
+(hardcoded mount path → workspace; `master` → `main`).
 
 ---
 
@@ -26,10 +52,10 @@ language boundary, not laziness, and the audit has to tell the two apart.
 | `common.js` | 70 | GJS (pure) | weighted-grid geometry math |
 | `settings-schema.json` | 145 | — | Cinnamon settings declaration (the canonical defaults) |
 
-**Git state:** on `master`, last functional commit `1e13bdf` (UUID migration); three commits on top
-are privacy-guard infra. Privacy hook is active (`core.hooksPath=scripts/hooks`), `.gitleaks.toml`
-present. `nohup.out` (113 KB Cinnamon log) sits in the working tree but is **gitignored** — local
-litter, not committed cruft, so out of audit scope.
+**Git state:** on `main`; functional history (UUID migration, live key-binding sync) below a stack
+of privacy-guard infra commits and the finding-#2 cleanup (`69c2115`). Privacy hook is active
+(`core.hooksPath=scripts/hooks`), `.gitleaks.toml` present. `nohup.out` (Cinnamon log) sits in the
+working tree but is **gitignored** — local litter, not committed cruft, so out of audit scope.
 
 **Slop profile — counts lie, name the real shape:** this is **low-slop, well-structured code with
 light residue**, not a slop pile. The residue is the *classic AI-codegen tell set* in miniature:
