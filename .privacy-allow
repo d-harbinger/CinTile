@@ -9,3 +9,24 @@
 # (e.g. /media/sf_*) still fires.
 /mnt/Projects
 /mnt/shared
+
+# --- declared 2026-07-28, after a fleet-wide audit ---
+
+# A Cinnamon applet UUID. Cinnamon identifies extensions as name@domain,
+# so these parse as addresses and are not.
+#
+calendar@cinnamon.org
+cornerbar@cinnamon.org
+favorites@cinnamon.org
+grouped-window-list@cinnamon.org
+keyboard@cinnamon.org
+menu@cinnamon.org
+network@cinnamon.org
+notifications@cinnamon.org
+power@cinnamon.org
+printers@cinnamon.org
+removable-drives@cinnamon.org
+separator@cinnamon.org
+sound@cinnamon.org
+systray@cinnamon.org
+xapp-status@cinnamon.org
