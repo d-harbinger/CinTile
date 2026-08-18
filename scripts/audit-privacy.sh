@@ -80,7 +80,18 @@ fi
 
 _is_allowed() {  # exact match against a declared synthetic value
   local v="$1" a
-  for a in "${ALLOW_VALUES[@]}"; do [ "$v" = "$a" ] && return 0; done
+  for a in "${ALLOW_VALUES[@]}"; do
+    [ "$v" = "$a" ] && return 0
+    # A history match is extracted from a diff line, so it can carry the leading
+    # +/- marker: several patterns (the address one especially) accept "+" and
+    # "-" as value characters, so the marker is swallowed into the match and
+    # "+ci-bot@example.com" never equals the declared "ci-bot@example.com".
+    # Declared values then kept firing on every added line, forever, which is
+    # exactly the "a check that never clears teaches its reader to skip it"
+    # failure. Compared with the marker stripped as well as with it intact, so a
+    # value that genuinely begins with one is still matched on its own terms.
+    [ "${v#[+-]}" = "$a" ] && return 0
+  done
   return 1
 }
 

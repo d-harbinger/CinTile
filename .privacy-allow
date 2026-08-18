@@ -15,6 +15,11 @@
 # A Cinnamon applet UUID. Cinnamon identifies extensions as name@domain,
 # so these parse as addresses and are not.
 #
+# The first entry is this extension's own former UUID, kept in the migration
+# instructions that tell an existing user how to move to the current one. The
+# domain in it is the author's, because the format requires a domain — it is a
+# product identifier, not a mailbox, and no mail was ever received at it.
+cintile@forgetting.me
 calendar@cinnamon.org
 cornerbar@cinnamon.org
 favorites@cinnamon.org
