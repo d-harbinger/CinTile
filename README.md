@@ -5,7 +5,7 @@ Keyboard-driven window tiling for the Cinnamon desktop environment. A port of [T
 ## Features
 
 - **Two-key tiling**: Press `Super+T` to show grid, press two keys to tile the focused window between those cells
-- **Weighted grid**: Up to 7×5 grid with per-column and per-row weight control for non-uniform layouts
+- **Weighted grid**: Up to 3 rows × 7 columns with per-column and per-row weight control for non-uniform layouts
 - **Multi-monitor**: Spacebar cycles the grid overlay between monitors
 - **Visual grid editor**: Proportional cell preview with rows/columns and per-axis weight adjustment
 - **Appearance controls**: Color theming (linked and unlinked modes), text size, border size, gap size, overlay opacity

@@ -42,10 +42,7 @@ caching problem. Add the file to `SRC_FILES` in the same change.
 
 ## Verification boundary
 
-CinTile can only be verified inside a running Cinnamon session, which this
-environment does not have. Nothing about tiling behaviour, the overlay, key
-capture, or the settings widgets can be claimed as working from here — deploy
-and observe is the owner's step. `make logs` is the diagnostic channel.
+CinTile can only be verified inside a running Cinnamon session. Nothing about tiling behaviour, the overlay, key capture, or the settings widgets can be claimed as working without one: deploy and observe. `make logs` is the diagnostic channel.
 
 ## Gotchas
 
@@ -60,9 +57,6 @@ and observe is the owner's step. `make logs` is the diagnostic channel.
 - **Store submission is not just a tag.** The Cinnamon Spices listing needs a
   `UUID/files/UUID/` restructure plus `info.json` and `screenshot.png` — a
   packaging change, tracked in the README roadmap alongside localization.
-- Untracked files exist at the repo root (an editor workspace file, a
-  `nohup.out` from a Cinnamon restart). They are not source; leave them out
-  of any commit.
 
 ## Where things are documented
 

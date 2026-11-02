@@ -8,7 +8,6 @@ __pycache__/
 setup-git.sh
 nohup.out
 *.code-workspace
-nohup.out
 # privacy-guard: per-clone patterns file (gitignored; see .privacy-patterns.example)
 .privacy-patterns
 # privacy-guard: privacy-related script log output (audit, host gates, etc.)
